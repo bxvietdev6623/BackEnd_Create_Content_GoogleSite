@@ -8,8 +8,11 @@ import json, re, time, os
 # ========================================
 # ⚙️ Cấu hình API - NẠP KHÓA TRỰC TIẾP
 # ========================================
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+if not OPENAI_API_KEY:
+    raise ValueError("❌ 缺少 OPENAI_API_KEY 环境变量，请在 Render 上设置 Environment Variables。")
 
+# ✅ 使用 OpenRouter 代理（可换成官方 endpoint）
 client = OpenAI(api_key=OPENAI_API_KEY, base_url="https://openrouter.ai/api/v1")
 MODEL = "gpt-4o-mini"
 
@@ -160,3 +163,4 @@ def home():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
+
