@@ -64,14 +64,13 @@ def generate_quality_keywords(base_kw, num_keywords):
 def generate_related_keywords(main_kw):
     """Sinh 3 từ khóa phụ có liên quan trực tiếp đến từ khóa chính chất lượng cao"""
     prompt = (
-    f"请为主关键词「{main_kw}」生成3个**高度相关的中文长尾关键词**。\n"
-    "要求：\n"
-    "1. 每个关键词长度为5~8个字；\n"
-    f"2. 每个关键词**必须包含主关键词「{main_kw}」**；\n"
-    "3. 语义上与主关键词紧密相关，表达更具体的搜索意图；\n"
-    "4. 不要与主关键词完全相同；\n"
-    "5. 只输出JSON数组格式，例如: [\"词1\",\"词2\",\"词3\"]"
-)
+        f"请为主关键词「{main_kw}」生成3个**高度相关的中文长尾关键词**。\n"
+        "要求：\n"
+        "1. 每个5~8个字；\n"
+        "2. 紧密围绕主关键词主题；\n"
+        "3. 不要与主关键词重复；\n"
+        "4. 只输出JSON数组格式，例如: [\"词1\",\"词2\",\"词3\"]"
+    )
     text = call_chat(prompt, max_tokens=200, temperature=0.8)
     try:
         arr = json.loads(text)
@@ -164,5 +163,3 @@ def home():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
-
-
