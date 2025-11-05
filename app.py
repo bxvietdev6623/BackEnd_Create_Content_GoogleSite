@@ -72,6 +72,7 @@ def generate_related_keywords(main_kw):
     "4. 不要与主关键词完全相同；\n"
     "5. 只输出JSON数组格式，例如: [\"词1\",\"词2\",\"词3\"]"
     )
+
     text = call_chat(prompt, max_tokens=200, temperature=0.8)
     try:
         arr = json.loads(text)
@@ -164,4 +165,3 @@ def home():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
-
